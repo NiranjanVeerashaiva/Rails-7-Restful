@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "show_articles" do %>
+  <%= turbo_stream.replace(dom_id(@article, "id"), partial: "articles/article", locals: { article: @article }) %>
+  <h2><%= @article.title %></h2>
+  <p><%= @article.content %></p>
+<% end %>

@@ -1,0 +1,22 @@
+<turbo-frame id="modal">
+  <div class="p-4 border rounded-md shadow-md mb-4 bg-white transition-colors duration-300">
+    <h2>New Admission</h2>
+
+    <%= form_with url: departments_admissions_path, model: @admission, data: { turbo_frame: "_top" } do |f| %>
+      <%= hidden_field_tag :patient_id, @patient.id %>
+      <div>
+        <%= f.label :admission_date %><br>
+        <%= f.text_field :admission_date, placeholder: "e.g., 26-03-2025" %>
+      </div>
+
+      <div>
+        <%= f.label :status %><br>
+        <%= f.select :status, ['Admitted', 'Discharged', 'Cancelled'], prompt: "Select status" %>
+      </div>
+
+      <div>
+        <%= f.submit "Create Admission" %>
+      </div>
+    <% end %>
+  </div>
+</turbo-frame>

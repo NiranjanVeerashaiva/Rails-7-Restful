@@ -1,0 +1,17 @@
+<div data-controller="article">
+  <%= form_with model: @article, data: { action: "submit->article#create" } do |form| %>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, name: "article[title]", data: { article_target: "title" } %>
+      <span class="text-red-500 hidden" data-article-target="titleError">This field is required</span>
+    </div>
+
+    <div class="field">
+      <%= form.label :content %>
+      <%= form.text_area :content, name: "article[content]", data: { article_target: "content" } %>
+      <span class="text-red-500 hidden" data-article-target="contentError">This field is required</span>
+    </div>
+
+    <%= form.submit "Save" %>
+  <% end %>
+</div>

@@ -1,0 +1,8 @@
+<p class="p-4 border rounded-md shadow-md mb-4 bg-white transition-colors duration-300">
+  <strong>Name:</strong> <%= patient.fullname %><br>
+  <strong>Age:</strong> <%= patient.age %><br>
+  <strong>Phone:</strong> <%= patient.phone_number %>
+  <div>
+    <%= link_to "View Details", patient_path(patient),class: "text-blue-500 block" %>
+  </div>
+</p>

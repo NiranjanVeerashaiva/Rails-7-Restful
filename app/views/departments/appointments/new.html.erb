@@ -1,0 +1,24 @@
+<turbo-frame id="modal">
+  <div class="p-4 border rounded-md shadow-md mb-4 bg-white transition-colors duration-300">
+
+    <h2>New Appointment</h2>
+
+    <%= form_with url: departments_appointments_path, model: @appointment, data: { turbo_frame: "_top" } do |f| %>
+      <%= hidden_field_tag :patient_id, @patient.id %>
+      <div>
+        <%= f.label :appointment_date %>
+        <%= f.text_field :appointment_date, placeholder: "e.g., 26-03-2025" %>
+      </div>
+
+      <div>
+        <%= f.label :status %>
+        <%= f.select :status, ['Scheduled', 'Completed', 'Cancelled'] %>
+      </div>
+
+      <div>
+        <%= f.submit "Create Appointment" %>
+      </div>
+    <% end %>
+  </div>
+</turbo-frame>
+

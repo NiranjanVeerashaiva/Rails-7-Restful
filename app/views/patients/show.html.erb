@@ -1,0 +1,35 @@
+<h1 class="font-bold text-2xl"><%= @patient.fullname %>'s Details</h1>
+
+<p><strong>Age:</strong> <%= @patient.age %></p>
+<p><strong>Phone:</strong> <%= @patient.phone_number %></p>
+
+<div class="p-4 border rounded-md shadow-md mb-4 bg-white transition-colors duration-300">
+
+  <h2>Appointments</h2>
+  <%= link_to "Add Appointment", new_departments_appointment_path(patient_id: @patient.id), class: "text-blue-500", data: { turbo_frame: "modal" } %>
+
+  <% if @appointments.any? %>
+    <ul>
+      <% @appointments.each do |appointment| %>
+        <li><%= appointment.appointment_date %> - <%= appointment.status %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No appointments yet.</p>
+  <% end %>
+</div>
+
+<div class="p-4 border rounded-md shadow-md mb-4 bg-white transition-colors duration-300">
+  <h2>Admissions</h2>
+  <%= link_to "Add Admission", new_departments_admission_path(patient_id: @patient.id), class: "text-blue-500", data: { turbo_frame: "modal" } %>
+
+  <% if @admissions.any? %>
+    <ul>
+      <% @admissions.each do |admission| %>
+        <li><%= admission.admission_date %> - <%= admission.status %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No admissions yet.</p>
+  <% end %>
+</div>

@@ -1,0 +1,13 @@
+<!--<turbo-stream action="append" target="patients_list">-->
+<!--  <template>-->
+    <%#= render @patient %>
+<!--  </template>-->
+<!--</turbo-stream>-->
+
+<!--<turbo-stream action="replace" target="modal">-->
+<!--  <template></template>-->
+<!--</turbo-stream>-->
+
+
+<%= turbo_stream.append "patients_list", partial: "patients/patient", locals: { patient: @patient } %>
+<%= turbo_stream.replace "form_container", partial: "patients/form", locals: { patient: Patient.new } %>
