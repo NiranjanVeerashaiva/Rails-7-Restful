@@ -1,4 +1,4 @@
-class Departments::AdmissionsController < ApplicationController
+class Departments::Admissions::AdmissionsController < ApplicationController
   def new
     @patient = Patient.find(params[:patient_id])
     @admission = @patient.admissions.new
