@@ -14,7 +14,10 @@ Rails.application.routes.draw do
     resources :appointments
     resources :admissions
   end
+  resources :projects do
+    resources :tasks
+  end
 
   # Defines the root path route ("/")
-  root "patients#index"
+  root "projects#index"
 end

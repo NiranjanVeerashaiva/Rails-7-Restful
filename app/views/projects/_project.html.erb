@@ -1,0 +1,9 @@
+<%= turbo_frame_tag dom_id(project, "id") do %>
+  <div class="p-4 border rounded-md shadow-md mb-4">
+    <%= link_to project, "data-turbo": false do %>
+      <h2 class="text-xl font-bold"><%= project.title %></h2>
+    <% end %>
+    <%= button_to "Delete", project_path(project), method: :delete, class: "text-red-500" %>
+  </div>  
+  <%#= link_to "Edit", edit_project_path(project), data: { turbo_stream: true } %>
+<% end %>

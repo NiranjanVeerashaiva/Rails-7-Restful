@@ -1,0 +1,60 @@
+<div class="grid grid-cols-1 mt-5 w-full">
+  <%= turbo_stream_from "tasks" %>
+  <div id="notification-container"></div>
+  <%= turbo_frame_tag "show_project" do %>
+    <div class="col-span-1 flex justify-between">
+      <h1 class="3xl font-bold"><%= @project.title %></h1>
+      <div class="bg-gray-400 px-2 py-1 rounded-lg"><%= link_to "Home", projects_path, data: { turbo_frame: "_top" } %></div>
+    </div>
+  <% end %>
+  <a href="<%= new_project_task_path(@project) %>" class="block text-white bg-green-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center w-[100px] m-5" data-turbo-stream="true" data-turbo-frame="modal_frame"> <span>ADD NEW</span></a>
+  <turbo-frame id="modal_frame"></turbo-frame>
+  <div id="tasks-progress-bar" data-controller="tasks-progress" data-tasks-progress-total="<%= @project.tasks.count %>" data-tasks-progress-completed="<%= @project.tasks.where(status: 'completed').count %>">
+    <div class="relative w-full bg-gray-200 rounded-md h-6 mt-4">
+      <div class="absolute top-0 left-0 h-6 bg-green-500 rounded-md transition-all duration-500" data-tasks-progress-target="bar" style="width: 0%;">
+      </div>
+      <div class="absolute w-full text-center text-sm font-bold" data-tasks-progress-target="percentage">0% Completed</div>
+    </div>
+  </div>
+  <div class="col-span-1 flex justify-center items-center font-bold"><h2>Tasks List</h2></div>
+  <div class="col-span-1 grid grid-cols-3 gap-4 mt-5">
+    <div class="p-4 border rounded-md shadow-md">
+      <div class="flex justify-between text-xl font-bold mb-2">
+        <h2 class="text-center uppercase">To Do</h2>
+        <span class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-500 text-white text-sm font-bold" id="tasks-count-to-do"><%= @project.tasks.where(status: "to_do").count %></span>
+      </div>
+      <%= turbo_frame_tag "tasks_list_to_do" do %>
+        <% @project.tasks.where(status: "to_do").each do |task| %>
+          <%= render "tasks/task", task: task, project: task.project %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="p-4 border rounded-md shadow-md">
+      <div class="flex justify-between text-xl font-bold mb-2">
+        <h2 class="text-center uppercase">In Progress</h2>
+        <span class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-500 text-white text-sm font-bold" id="tasks-count-in-progress"><%= @project.tasks.where(status: "in_progress").count %></span>
+      </div>
+      <%= turbo_frame_tag "tasks_list_in_progress" do %>
+        <% @project.tasks.where(status: "in_progress").each do |task| %>
+          <%= render "tasks/task", task: task, project: task.project %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="p-4 border rounded-md shadow-md">
+      <div class="flex justify-between text-xl font-bold mb-2">
+        <h2 class="text-center uppercase">Completed </h2>
+        <span class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-500 text-white text-sm font-bold" id="tasks-count-completed"><%= @project.tasks.where(status: "completed").count %></span>
+      </div>
+      <%= turbo_frame_tag "tasks_list_completed" do %>
+        <% @project.tasks.where(status: "completed").each do |task| %>
+          <%= render "tasks/task", task: task, project: task.project %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= turbo_frame_tag "show_task_details" %>
+
+

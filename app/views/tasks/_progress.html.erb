@@ -1,0 +1,9 @@
+<div id="tasks-progress-bar" data-controller="tasks-progress" data-tasks-progress-total="<%= project.tasks.count %>"
+  data-tasks-progress-completed="<%= project.tasks.where(status: 'completed').count %>">
+  
+  <div class="relative w-full bg-gray-200 rounded-md h-6">
+    <div class="absolute top-0 left-0 h-6 bg-green-500 rounded-md transition-all duration-500" data-tasks-progress-target="bar" style="width: 0%;">
+    </div>
+    <div class="absolute w-full text-center text-sm font-bold" data-tasks-progress-target="percentage">0% Completed</div>
+  </div>
+</div>
